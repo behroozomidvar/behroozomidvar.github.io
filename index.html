@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root {
+  --sidebar-width: 280px;
+  --nav-height: 54px;
+  --accent: #52adc8;
+  --text-dark: #222;
+  --text-muted: #555;
+  --bg: #fff;
+  --bg-sidebar: #f2f3f3;
+  --border: #e0e0e0;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Lato', sans-serif; color: var(--text-dark); background: var(--bg); font-size: 16px; }
+
+/* Top Nav */
+.top-nav {
+  background: #222;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.top-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+  margin-right: 28px;
+  opacity: 0.85;
+  transition: opacity 0.15s;
+}
+.top-nav a:hover, .top-nav a.active { opacity: 1; border-bottom: 2px solid var(--accent); padding-bottom: 2px; }
+.top-nav .site-title { font-size: 18px; font-weight: 700; margin-right: 44px; opacity: 1; }
+
+/* Layout */
+.page-wrapper { display: flex; max-width: 1100px; margin: 0 auto; padding: 48px 28px; gap: 48px; }
+
+/* Sidebar */
+.sidebar {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  text-align: center;
+}
+.profile-photo {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  border: 4px solid var(--border);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  margin: 0 auto 18px;
+  object-fit: cover;
+}
+.sidebar h2 { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+.sidebar .bio { font-size: 15px; color: var(--text-muted); line-height: 1.5; margin: 8px 0 16px; }
+.sidebar .location { font-size: 14px; color: var(--text-muted); margin-bottom: 14px; }
+.sidebar .location i { margin-right: 5px; }
+.social-links { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+.social-links a { color: var(--text-muted); font-size: 20px; transition: color 0.15s; }
+.social-links a:hover { color: var(--accent); }
+
+/* Main Content */
+.main-content { flex: 1; min-width: 0; }
+.main-content h1 { font-size: 28px; font-weight: 700; margin-bottom: 18px; color: var(--text-dark); }
+.main-content p { font-size: 16px; line-height: 1.75; color: var(--text-muted); margin-bottom: 14px; }
+
+/* Buttons */
+.btn-row { display: flex; gap: 12px; margin-top: 24px; margin-bottom: 36px; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Lato', sans-serif;
+  color: var(--text-dark);
+  background: var(--bg-sidebar);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+.btn:hover { background: #e8e9eb; border-color: var(--accent); }
+.btn i { color: var(--accent); }
+
+/* News section */
+.news-section { margin-top: 8px; }
+.news-section h2 { font-size: 20px; font-weight: 700; margin-bottom: 14px; color: var(--text-dark); }
+.news-item { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.news-item:last-child { border-bottom: none; }
+.news-date { font-size: 13px; color: var(--accent); font-weight: 600; white-space: nowrap; min-width: 80px; }
+.news-text { font-size: 15px; color: var(--text-muted); line-height: 1.5; }
+
+/* Publications & Talks items */
+.item { border-bottom: 1px solid var(--border); padding: 18px 0; }
+.item:last-child { border-bottom: none; }
+.item h3 { font-size: 17px; margin-bottom: 5px; }
+.item h3 a { color: var(--accent); text-decoration: none; }
+.item h3 a:hover { text-decoration: underline; }
+.item .meta { font-size: 14px; color: var(--text-muted); }
+.item .description { font-size: 15px; color: var(--text-muted); margin-top: 6px; line-height: 1.6; }
+
+/* Page tabs */
+.page-tabs { display: none; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* Footer */
+.footer { text-align: center; padding: 28px; font-size: 13px; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 48px; }
+.footer a { color: var(--accent); text-decoration: none; }
+
+@media (max-width: 768px) {
+  .page-wrapper { flex-direction: column; padding: 28px 16px; gap: 28px; }
+  .sidebar { width: 100%; }
+  .btn-row { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- Top Navigation -->
+<nav class="top-nav">
+  <a href="#" class="site-title">Behrooz Omidvar-Tehrani</a>
+  <a href="#" class="active" onclick="showTab('about')">About</a>
+  <a href="#" onclick="showTab('publications')">Publications</a>
+  <a href="#" onclick="showTab('talks')">Talks</a>
+</nav>
+
+<div class="page-wrapper">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <img class="profile-photo" src="images/profile.jpg" alt="Behrooz Omidvar-Tehrani">
+    <h2>Behrooz Omidvar-Tehrani</h2>
+    <p class="bio">Science Lead @ AWS Agentic AI</p>
+    <p class="location"><i class="fa-solid fa-location-dot"></i> Santa Clara, CA</p>
+    <div class="social-links">
+      <a href="https://www.linkedin.com/in/behroozomidvar/" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+      <a href="https://scholar.google.com/citations?user=_Uh9Q6EAAAAJ&hl=en" target="_blank" title="Google Scholar"><i class="fa-solid fa-graduation-cap"></i></a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- About Tab -->
+    <div class="tab-content active" id="tab-about">
+      <h1>About</h1>
+      <p>I am a Science Lead and Senior Applied Scientist at Amazon Web Services (AWS), working on Agentic AI. My current focus is on building memory, context, and personalization systems for AI coding agents.</p>
+      <p>My research interests span large language models, code generation, AI agents, and interactive data exploration. I have published in top venues including SIGMOD, VLDB, ICDE, and KDD.</p>
+      <p>Previously, I worked on data exploration and summarization systems, developing novel approaches to help users understand and interact with large-scale datasets.</p>
+
+      <div class="btn-row">
+        <a class="btn" onclick="showTab('publications')"><i class="fa-solid fa-file-lines"></i> Publications</a>
+        <a class="btn" onclick="showTab('talks')"><i class="fa-solid fa-microphone"></i> Talks</a>
+      </div>
+
+      <div class="news-section">
+        <h2>News</h2>
+        <div class="news-item">
+          <span class="news-date">Apr 2026</span>
+          <span class="news-text">Invited talk at MDD 2026 in France: "AI for Code: From Language Models to Coding Agents"</span>
+        </div>
+        <div class="news-item">
+          <span class="news-date">May 2026</span>
+          <span class="news-text">Joined the Kiro team at AWS to lead memory, context, and personalization for AI coding agents</span>
+        </div>
+        <div class="news-item">
+          <span class="news-date">2025</span>
+          <span class="news-text">Working on agentic AI systems for software development at AWS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Publications Tab -->
+    <div class="tab-content" id="tab-publications">
+      <h1>Publications</h1>
+      <div class="item">
+        <h3><a href="#">AI for Code: From Language Models to Coding Agents</a></h3>
+        <p class="meta">MDD 2026 &middot; April 2026</p>
+        <p class="description">This paper covers the evolution of AI-powered code generation, from early language models to modern agentic systems capable of autonomous software engineering tasks.</p>
+      </div>
+      <div class="item">
+        <h3><a href="#">[Sample] Interactive Data Exploration with Smart Drill-Down</a></h3>
+        <p class="meta">SIGMOD &middot; 2020</p>
+        <p class="description">A framework for interactive exploration of large datasets using intelligent drill-down operations.</p>
+      </div>
+      <div class="item">
+        <h3><a href="#">[Sample] Summarizing Large-Scale Data Cubes with Factorization</a></h3>
+        <p class="meta">VLDB &middot; 2019</p>
+        <p class="description">Novel factorization techniques for generating compact summaries of high-dimensional datasets.</p>
+      </div>
+    </div>
+
+    <!-- Talks Tab -->
+    <div class="tab-content" id="tab-talks">
+      <h1>Talks</h1>
+      <div class="item">
+        <h3><a href="#">AI for Code: From Language Models to Coding Agents</a></h3>
+        <p class="meta"><i class="fa-solid fa-microphone"></i> Invited Talk &middot; MDD 2026 &middot; France &middot; April 29, 2026</p>
+        <p class="description">A comprehensive overview of the trajectory from language models to coding agents, covering code generation, program repair, test generation, and autonomous software engineering.</p>
+      </div>
+      <div class="item">
+        <h3><a href="#">[Sample] Data-Driven Storytelling for Enterprise Analytics</a></h3>
+        <p class="meta"><i class="fa-solid fa-microphone"></i> Conference Talk &middot; KDD 2021 &middot; Virtual</p>
+        <p class="description">Techniques for automatically narrating analytical insights from complex enterprise datasets.</p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="footer">
+  &copy; 2026 Behrooz Omidvar-Tehrani
+</div>
+
+<script>
+function showTab(tab) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.querySelectorAll('.top-nav a:not(.site-title)').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.top-nav a:not(.site-title)').forEach(el => {
+    if (el.textContent.trim().toLowerCase() === tab) el.classList.add('active');
+  });
+}
+</script>
+</body>
+</html>
